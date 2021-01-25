@@ -1,3 +1,10 @@
+# 1.0.0 (2021-01-25)
+
+
+### Bug Fixes
+
+* giveawayWinDM erroring due to it not being a string ([decbb3b](https://github.com/slow/nitro-sniper/commit/decbb3b2514624433387a645e45ccd01c3bd2981))
+
 ## [1.2.6](https://github.com/slow/nitro-sniper/compare/v1.2.5...v1.2.6) (2021-01-25)
 
 
