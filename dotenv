@@ -1,0 +1,7 @@
+guildTokens=""
+mainToken=""
+snipeGiveaways=true
+snipeGiveawaysOnlyNitro=true
+dmHosterOnGiveawayWin=true
+giveawayWinDM="hey man, i won the giveaway. could i redeem my prize?"
+webhookUrl=""

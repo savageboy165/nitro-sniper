@@ -1,0 +1,37 @@
+{
+   "name": "Nitro Sniper",
+   "description": "A nitro sniper for discord.",
+   "repository": "https://github.com/slow/nitro-sniper",
+   "logo": "https://discord.com/assets/2c21aeda16de354ba5334551a883b481.png",
+   "stack": "heroku-20",
+   "env": {
+      "mainToken": {
+         "description": "Your main account's token, used for redeeming the gift/nitro.",
+         "required": true
+      },
+      "guildTokens": {
+         "description": "Your alt accounts tokens (Typically multiple with a lot of guilds)  (Split multiple tokens with \",\")",
+         "required": true
+      },
+      "webhookUrl": {
+         "description": "The webhook URL that will be fired once nitro is sniped / a giveaway is won. (Leave empty if you don't want it)",
+         "required": false
+      },
+      "snipeGiveaways": {
+         "description": "Whether you want the sniper to react on giveaways. (true/false | default: true)",
+         "required": true
+      },
+      "snipeGiveawaysOnlyNitro": {
+         "description": "Whether the giveaway sniper should only react to nitro giveaways (true/false | default: false)",
+         "required": false
+      },
+      "dmHosterOnGiveawayWin": {
+         "description": "Whether you want the sniper to dm the host on win. (true/false | default: true)",
+         "required": false
+      },
+      "giveawayWinDM": {
+         "description": "The text to send to the host when a giveaway is won (ignore if dmHosterOnGiveawayWin is off) (default: Hey, i won the giveaway. Could i redeem my prize?)",
+         "required": false
+      }
+   }
+}
