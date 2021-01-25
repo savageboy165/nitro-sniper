@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/slow/nitro-sniper/compare/v1.0.0...v1.1.0) (2021-01-25)
+
+
+### Features
+
+* guild count on login ([37f2eaf](https://github.com/slow/nitro-sniper/commit/37f2eaf5ec21f8b8883a29982f34c370c9e47264))
+
 # 1.0.0 (2021-01-25)
 
 
