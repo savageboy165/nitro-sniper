@@ -237,7 +237,7 @@ for (const token of tokens) {
    });
 
    client.on('ready', () => {
-      console.log(chalk.green(`[Sniper] Logged in as ${client.user.tag}.`));
+      console.log(chalk.green(`[Sniper] Logged in as ${client.user.tag} with ${client.guilds.size} total servers.`));
    });
 
    setTimeout(() => {
