@@ -14,7 +14,7 @@ const webhookUrl = process.env.webhookUrl;
 const snipeGiveaways = Boolean(process.env.snipeGiveaways) || true;
 const dmHosterOnGiveawayWin = Boolean(process.env.dmHosterOnGiveawayWin) || true;
 const snipeGiveawaysOnlyNitro = Boolean(process.env.snipeGiveawaysOnlyNitro) || false;
-const giveawayWinDM = process.env.giveawayWinDM || 'Hey, i won the giveaway. Could i redeem my prize?';
+const giveawayWinDM = String(process.env.giveawayWinDM) || 'Hey, i won the giveaway. Could i redeem my prize?';
 
 let paymentMethod = null;
 
@@ -30,14 +30,14 @@ phin({
    if (err) console.log(err);
    if (res.body['message'] == '401: Unauthorized') {
       console.log(chalk.red('[Sniper] Invalid main token, terminating process.'));
-      process.exit(-1)
+      process.exit(-1);
    } else if (res.body.length && res.body.length === 0) {
       console.log(chalk.red('[Sniper] Main token does not have a billing source, some codes will not be sniped.'));
    } else if (res.body[0]) {
       paymentMethod = res.body[0].id;
    } else {
-      console.log(chalk.red(`[Sniper] Unable to get billing source: ${res.body}`))
-   }
+      console.log(chalk.red(`[Sniper] Unable to get billing source: ${res.body}`));
+   };
 })
 
 if (webhookUrl != null) {
@@ -54,7 +54,7 @@ if (webhookUrl != null) {
       webhookclient.send('', { embeds: [embed] }).catch(() => {
          if (webhookUrl) {
             console.log(chalk.red("[Sniper] Couldn't reach webhook. Your webhook URL is invalid."));
-         }
+         };
       });
    };
 };
@@ -110,7 +110,7 @@ for (const token of tokens) {
             if (consumedCodes.indexOf(code) > -1) {
                console.log(chalk.gray(`[Sniper] Avoiding Duplicate - Code: ${chalk.bold(code)} - ${from} (${author})`));
                continue;
-            }
+            };
 
             let payload = `{"channel_id":${msg.channel.id},"payment_source_id":${paymentMethod}}`;
             phin({
@@ -172,7 +172,7 @@ for (const token of tokens) {
                   });
                } else if (res.body.message == 'Unknown Gift Code') {
                   console.log(chalk.red(`[Sniper] Invalid Code - Code: ${chalk.bold(code)} - ${from} (${author}) - ${end}`));
-               }
+               };
                consumedCodes.push(code);
             });
          }
@@ -183,12 +183,12 @@ for (const token of tokens) {
             let timeout = randomInt(10e3, 30e3);
             let prize = msg.embeds[0].author.name;
             if (snipeGiveawaysOnlyNitro && !prize.toLowerCase().includes('nitro')) return;
-            console.log(chalk.gray(`[Sniper] Giveaway detected in ${from}, reacting in ${((timeout % 60000) / 1000).toFixed(0)} seconds.`))
+            console.log(chalk.gray(`[Sniper] Giveaway detected in ${from}, reacting in ${((timeout % 60000) / 1000).toFixed(0)} seconds.`));
 
             setTimeout(async () => {
                let react = await msg.react('🎉').catch(() => null);
                if (react) console.log(chalk.green(`[Sniper] Reacted to giveaway in ${from} (Prize: ${prize})`));
-            }, timeout)
+            }, timeout);
          }
          if (msg.author.id == '294882584201003009' && msg.content.includes('Congratulations') && msg.mentions.users.first()?.id == client.user.id) {
             let messageLink = msg.content.replace(/\r/g, "").split(/\n/)[1].replace(/(<|>)/g, '');
@@ -224,16 +224,16 @@ for (const token of tokens) {
                      }
                   ],
                   color: '#41FC9F'
-               })
+               });
 
                if (dmHosterOnGiveawayWin) {
                   let sentMsg = await hoster.send(giveawayWinDM).catch(() => null);
-                  if (sentMsg) console.log(chalk.gray(`[Sniper] DMed giveaway hoster (${hoster.tag}) - ${giveawayWinDM}`))
+                  if (sentMsg) console.log(chalk.gray(`[Sniper] DMed giveaway hoster (${hoster.tag}) - ${giveawayWinDM}`));
                   else console.log(chalk.red(`[Sniper] Failed to DM giveaway host (${hoster.tag}) - This might require you to manually log in.`));
-               }
-            }
-         }
-      }
+               };
+            };
+         };
+      };
    });
 
    client.on('ready', () => {
@@ -242,11 +242,11 @@ for (const token of tokens) {
 
    setTimeout(() => {
       client.login(token).catch(err => {
-         console.log(chalk.red(`[Sniper] Skipping alt token - ${err} - ${token}`))
+         console.log(chalk.red(`[Sniper] Skipping alt token - ${err} - ${token}`));
       });
    }, randomInt(1e3, 3e3));
 
    function randomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
-   }
+   };
 }
